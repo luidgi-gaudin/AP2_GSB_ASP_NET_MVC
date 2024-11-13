@@ -1,0 +1,116 @@
+@model AP2_MVC_DOTNET.ViewModels.OrdonnanceViewModel
+
+<div class="container mt-4">
+    <h2>Modifier l'Ordonnance</h2>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="OrdonnanceId" />
+        <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="PatientId" class="form-label">Patient</label>
+            <select asp-for="PatientId" class="form-select" id="patientSelect">
+                <option value="">Sélectionnez un patient</option>
+                @foreach (var patient in Model.Patients)
+                {
+                    <option value="@patient.PatientId">@patient.Nom_p @patient.Prenom_p</option>
+                }
+            </select>
+            <span asp-validation-for="PatientId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="form-label">Médicaments</label>
+            <div class="row" id="medicamentsList">
+                @foreach (var medicament in Model.Medicaments)
+                {
+                    <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                            <input type="checkbox" 
+                                   class="form-check-input medicament-checkbox" 
+                                   name="SelectedMedicamentsId" 
+                                   value="@medicament.MedicamentId"
+                                   data-allergies="@string.Join(",", medicament.Allergies.Select(a => a.AllergieId))"
+                                   id="med_@medicament.MedicamentId"
+                                   @(Model.SelectedMedicamentsId.Contains(medicament.MedicamentId) ? "checked" : "") />
+                            <label class="form-check-label" for="med_@medicament.MedicamentId">
+                                @medicament.Libelle_med
+                            </label>
+                        </div>
+                    </div>
+                }
+            </div>
+            <span asp-validation-for="SelectedMedicamentsId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Posologie" class="form-label">Posologie</label>
+            <textarea asp-for="Posologie" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Posologie" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Duree_traitement" class="form-label">Durée du traitement</label>
+            <input asp-for="Duree_traitement" class="form-control" />
+            <span asp-validation-for="Duree_traitement" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Instructions_specifique" class="form-label">Instructions spécifiques</label>
+            <textarea asp-for="Instructions_specifique" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Instructions_specifique" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a asp-action="Index" class="btn btn-secondary">Retour</a>
+        </div>
+    </form>
+</div>
+<script>
+        let patientAllergies = [];
+
+        // Charger les allergies au chargement de la page
+        document.addEventListener('DOMContentLoaded', async function() {
+            const patientSelect = document.getElementById('patientSelect');
+            if (patientSelect.value) {
+                await loadPatientAllergies(patientSelect.value);
+            }
+        });
+
+        document.getElementById('patientSelect').addEventListener('change', async function() {
+            await loadPatientAllergies(this.value);
+        });
+
+        async function loadPatientAllergies(patientId) {
+            if (patientId) {
+                try {
+                    const response = await fetch(`/Ordonnance/GetPatientAllergies/${patientId}`);
+                    patientAllergies = await response.json();
+                    updateMedicaments();
+                } catch (error) {
+                    console.error('Erreur lors de la récupération des allergies:', error);
+                }
+            } else {
+                patientAllergies = [];
+                updateMedicaments();
+            }
+        }
+
+        function updateMedicaments() {
+            const medicamentCheckboxes = document.querySelectorAll('.medicament-checkbox');
+            
+            medicamentCheckboxes.forEach(checkbox => {
+                const medicamentAllergies = checkbox.dataset.allergies.split(',').filter(a => a);
+                const hasAllergy = medicamentAllergies.some(allergyId => 
+                    patientAllergies.includes(parseInt(allergyId))
+                );
+
+                checkbox.disabled = hasAllergy;
+                checkbox.checked = hasAllergy ? false : checkbox.checked;
+
+                // Mise à jour visuelle
+                checkbox.closest('.form-check').style.opacity = hasAllergy ? '0.5' : '1';
+            });
+        }
+    </script>

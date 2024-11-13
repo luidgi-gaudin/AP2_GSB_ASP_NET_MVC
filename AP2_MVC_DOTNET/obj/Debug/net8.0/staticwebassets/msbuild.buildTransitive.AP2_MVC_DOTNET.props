@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\AP2_MVC_DOTNET.props" />
+</Project>

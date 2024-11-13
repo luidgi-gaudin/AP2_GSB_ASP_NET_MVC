@@ -1,0 +1,103 @@
+@model IEnumerable<Patient>
+
+@{
+    ViewBag.Title = "Patients";
+}
+
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="ui--screen-header">
+            <div class="col">
+                <h1>Liste des patients</h1>
+            </div>
+            <hr class="trait"/>
+        </div>
+        <div class="col text-right">
+            <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un patient...">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card text-center h-100">
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <a href="@Url.Action("Add", "Patient")" class="btn btn-primary btn-lg open-modal" data-title="Ajouter un patient">
+                        <i class="bi bi-plus"></i>
+                    </a>
+                </div>
+                <div class="card-footer">
+                    <p>Ajouter un patient</p>
+                </div>
+            </div>
+        </div>
+        @foreach (var patient in Model)
+        {
+            <div class="col-md-3 mb-3 patient-card">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@patient.Nom_p @patient.Prenom_p</h5>
+                        <p class="card-text">Sexe: @patient.Sexe_p</p>
+                        <a href="@Url.Action("Details", "Patient", new { id = patient.PatientId })" class="btn btn-secondary open-modal" data-title="Détails du patient">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a href="@Url.Action("Edit", "Patient", new { id = patient.PatientId })" class="btn btn-warning open-modal" data-title="Modifier le patient">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a href="@Url.Action("Delete", "Patient", new { id = patient.PatientId })" class="btn btn-danger open-modal" data-title="Supprimer le patient">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="patientModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="patientModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenu Popup -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            var searchText = this.value.toLowerCase();
+            var patientCards = document.querySelectorAll('.patient-card'); //case a effacer
+            patientCards.forEach(function(card) {
+                var patientName = card.querySelector('.card-title').textContent.toLowerCase(); //case a rechercher
+                if (patientName.includes(searchText)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+         document.addEventListener('DOMContentLoaded', function () {
+                    const modal = new bootstrap.Modal(document.getElementById('patientModal'));
+                    const modalTitle = document.getElementById('patientModalLabel');
+                    const modalBody = document.querySelector('#patientModal .modal-body');
+        
+                    document.querySelectorAll('.open-modal').forEach(function (button) {
+                        button.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            const url = this.getAttribute('href');
+                            const title = this.getAttribute('data-title');
+        
+                            fetch(url)
+                                .then(response => response.text())
+                                .then(html => {
+                                    modalTitle.textContent = title;
+                                    modalBody.innerHTML = html;
+                                    modal.show();
+                                })
+                                .catch(error => console.error('Error loading modal content:', error));
+                        });
+                    });
+                });
+    </script>

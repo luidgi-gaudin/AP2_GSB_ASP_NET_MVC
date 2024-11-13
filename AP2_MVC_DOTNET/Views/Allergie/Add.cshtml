@@ -1,0 +1,21 @@
+@model Allergie  
+
+@{
+    Layout=null;
+}
+
+<div>
+    <form asp-action="Add" method="post">
+        <div class="form-group">
+            <label asp-for="Libelle_al" class="control-label">Nom de l'allergie :</label>
+            <input asp-for="Libelle_al" class="form-control" />
+            <span asp-validation-for="Libelle_al" class="text-danger"></span>
+        </div> 
+        <br/>
+        <div class="form-group">
+            <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+            <input type="submit" value="Enregistrer" class="btn btn-primary"/>
+        </div>
+    </form>
+
+</div>

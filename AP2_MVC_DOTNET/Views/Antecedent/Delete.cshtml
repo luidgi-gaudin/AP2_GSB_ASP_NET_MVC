@@ -1,0 +1,17 @@
+@model Antecedent
+
+@{
+    Layout = null;
+}
+ 
+<div>
+    <form asp-action="Delete" method="post">
+        <div class="form-group">
+            <input type="hidden" asp-for="AntecedentId" />
+            <h2>Voulez vous vraiment supprimer l'antécédent @Model.Libelle_a ?</h2>
+            <br/>
+            <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+            <input type="submit" class="btn btn-danger" value="Supprimer"/>
+        </div>
+    </form>
+</div>

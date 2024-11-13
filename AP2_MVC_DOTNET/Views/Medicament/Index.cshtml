@@ -1,0 +1,98 @@
+@model IEnumerable<MedicamentViewModel>
+
+@{
+    ViewBag.Title = "Médicaments";
+    Layout = "_Layout";
+}
+
+<h2>Liste des Médicaments</h2>
+<div>
+    <div class="col text-right">
+        <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un médicament...">
+        <div class="text-start mt-1">
+            <a href="@Url.Action("Add", "Medicament")" class="btn btn-primary open-modal" data-title="Ajouter un médicament">Ajouter un médicament</a>
+        </div>
+    </div>
+    <br/>
+    <table class="table-responsive-md table table-hover table-bordered" style="border-radius: 1rem ; overflow: hidden">
+        <thead>
+        <tr>
+            <th style="background:#007bff; color: white">
+                Médicament
+            </th>
+            <th style="background:#007bff; color: white">
+                Action
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var medicament in Model)
+        {
+            <tr class="row-medicament">
+                <td class="name-medicament">
+                    @medicament.Medicament.Libelle_med
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Medicament", new { id = medicament.Medicament.MedicamentId })" class="btn btn-warning open-modal" data-title="Modifier le médicament">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a href="@Url.Action("Delete", "Medicament", new { id = medicament.Medicament.MedicamentId })" class="btn btn-danger open-modal" data-title="Supprimer le médicament">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="medicamentModal" tabindex="-1" aria-labelledby="medicamentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="medicamentModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenu Popup -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('searchInput').addEventListener('keyup', function() {
+            var searchText = this.value.toLowerCase();
+            var medicamentCards = document.querySelectorAll('.row-medicament');
+            medicamentCards.forEach(function(card) {
+                var medicamentName = card.querySelector('.name-medicament').textContent.toLowerCase();
+                if (medicamentName.includes(searchText)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = new bootstrap.Modal(document.getElementById('medicamentModal'));
+        const modalTitle = document.getElementById('medicamentModalLabel');
+        const modalBody = document.querySelector('#medicamentModal .modal-body');
+
+        document.querySelectorAll('.open-modal').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const url = this.getAttribute('href');
+                const title = this.getAttribute('data-title');
+
+                fetch(url)
+                    .then(response => response.text())
+                    .then(html => {
+                        modalTitle.textContent = title;
+                        modalBody.innerHTML = html;
+                        modal.show();
+                    })
+                    .catch(error => console.error('Error loading modal content:', error));
+            });
+        });
+    });
+</script>

@@ -1,0 +1,39 @@
+@model AP2_MVC_DOTNET.Models.Ordonnance
+
+@{
+    ViewBag.Title = "Détails de l'ordonnance";
+    Layout = "_Layout";
+}
+
+<h2>Détails de l'ordonnance</h2>
+<div>
+    <div class="form-group">
+        <label>Médecin :</label>
+        <p>@Model.Medecin.Nom_m @Model.Medecin.Prenom_m</p>
+    </div>
+    <div class="form-group">
+        <label>Patient :</label>
+        <p>@Model.Patient.Nom_p @Model.Patient.Prenom_p</p>
+    </div>
+    <div class="form-group">
+        <label>Durée du traitement :</label>
+        <p>@Model.Duree_traitement</p>
+    </div>
+    <div class="form-group">
+        <label>Instructions spécifiques :</label>
+        <p>@Model.Instructions_specifique</p>
+    </div>
+    <div class="form-group">
+        <label>Posologie :</label>
+        <p>@Model.Posologie</p>
+    </div>
+    <div class="form-group">
+        <label>Médicament :</label>
+        @foreach(var medicament in Model.Medicaments)
+        {
+            <p>@medicament.Libelle_med</p>
+        }
+    </div>
+    <br/>
+    <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+</div>

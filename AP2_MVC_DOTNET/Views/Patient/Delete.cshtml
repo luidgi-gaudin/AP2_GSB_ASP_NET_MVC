@@ -1,0 +1,15 @@
+@model AP2_MVC_DOTNET.ViewModels.PatientDetailsViewModel
+
+@{
+    Layout = null;
+}
+<div style="text-align: center">
+    <h1>Voulez-vous vraiment supprimer le Patient @Model.Patient.Nom_p @Model.Patient.Prenom_p?</h1>
+    <form asp-action="Delete" method="post">
+        <input asp-for="Patient.PatientId" type="hidden" />         
+        <div style="text-align: center">
+            <a asp-controller="Patient" asp-action="Index" class="btn btn-secondary">Annuler</a>
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </div> 
+    </form> 
+</div>

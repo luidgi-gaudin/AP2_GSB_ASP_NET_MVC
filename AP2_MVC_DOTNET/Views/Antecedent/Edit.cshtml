@@ -1,0 +1,21 @@
+@model Antecedent
+
+@{
+    Layout = null;
+}
+
+<div>
+    <form asp-action="Edit" method="post">
+    <div class="form-group">
+        <input type="hidden" asp-for="AntecedentId" />
+        <label asp-for="Libelle_a" class="control-label">Nom de l'Antécédent :</label>
+        <input asp-for="Libelle_a" class="form-control" />
+        <span asp-validation-for="Libelle_a" class="text-danger"></span>
+    </div> 
+    <br/>
+    <div class="form-group">
+        <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+        <input type="submit" value="Enregistrer" class="btn btn-primary"/>
+    </div>
+    </form>
+</div>

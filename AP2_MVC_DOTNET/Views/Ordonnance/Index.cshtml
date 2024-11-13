@@ -1,0 +1,45 @@
+@model IEnumerable<AP2_MVC_DOTNET.Models.Ordonnance>
+
+@{
+    ViewBag.Title = "Ordonnances";
+    Layout = "_Layout";
+}
+
+<h2>Liste des Ordonnances</h2>
+<div>
+    <div class="col text-right">
+        <a href="@Url.Action("Add", "Ordonnance")" class="btn btn-primary">Ajouter une ordonnance</a>
+    </div>
+    <br/>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>Médecin</th>
+            <th>Patient</th>
+            <th>Durée du traitement</th>
+            <th>Date création</th>
+            <th>Actions</th>
+            <th>PDF</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var ordonnance in Model)
+        {
+            <tr>
+                <td>@ordonnance.Medecin.Nom_m @ordonnance.Medecin.Prenom_m</td>
+                <td>@ordonnance.Patient.Nom_p @ordonnance.Patient.Prenom_p</td>
+                <td>@ordonnance.Duree_traitement</td>
+                <td>@ordonnance.DateCréation.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a href="@Url.Action("Details", "Ordonnance", new { id = ordonnance.OrdonnanceId })" class="btn btn-secondary">Détails</a>
+                    <a href="@Url.Action("Edit", "Ordonnance", new { id = ordonnance.OrdonnanceId })" class="btn btn-warning">Modifier</a>
+                    <a asp-action="Delete" asp-controller="Ordonnance" asp-route-id="@ordonnance.OrdonnanceId" class="btn btn-danger">Supprimer</a>
+                </td>
+                <td>
+                    <a asp-action="ExportToPdf" asp-controller="Ordonnance" asp-route-id="@ordonnance.OrdonnanceId" class="btn btn-info">Exporter en PDF</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

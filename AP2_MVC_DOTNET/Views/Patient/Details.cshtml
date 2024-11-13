@@ -1,0 +1,53 @@
+@model AP2_MVC_DOTNET.ViewModels.PatientDetailsViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="container mt-5">
+    <div class="mb-3">
+        <h5 class="card-title">Numéro de sécurité sociale:</h5>
+        <p class="card-text">@Model.Patient.Num_secu</p>
+    </div>
+    <div class="mb-3">
+        <h5 class="card-title">Nom complet:</h5>
+        <p class="card-text">@Model.Patient.Nom_p @Model.Patient.Prenom_p</p>
+    </div>
+    <div class="mb-3">
+        <h5 class="card-title">Sexe:</h5>
+        <p class="card-text">@Model.Patient.Sexe_p</p>
+    </div>
+    <div class="mb-3">
+        <h5 class="card-title">Allergies:</h5>
+        <ul class="list-group">
+            @(Model.Patient.Allergies.Count == 0 ? "Aucune allergie" : "")
+            @foreach (var allergie in Model.Patient.Allergies)
+            {
+                <li class="list-group-item">@allergie.Libelle_al</li>
+            }
+        </ul>
+    </div>
+    <div class="mb-3">
+        <h5 class="card-title">Antécédents:</h5>
+        <ul class="list-group">
+            @(Model.Patient.Antecedents.Count == 0 ? "Aucun antécédent" : "")
+            @foreach (var antecedent in Model.Patient.Antecedents)
+            {
+                <li class="list-group-item">@antecedent.Libelle_a</li>
+            }
+        </ul>
+    </div>
+    <div class="mb-3">
+        <h5 class="card-title">Ordonnances :</h5> 
+        <br/>
+        <a asp-action="Add" asp-controller="Ordonnance"class="btn btn-primary">Ajouter une Ordonnance</a>
+        <ul class="list-group">
+                @(Model.Patient.Ordonnances.Count == 0 ? "Aucune ordonnance" : "")
+                @foreach (var Ordonnance in Model.Patient.Ordonnances)
+                {
+                    <a asp-action="Details" asp-controller="Ordonnance" asp-route-id="@Ordonnance.OrdonnanceId" class="list-group-item list-group-item-action">@Ordonnance.DateCréation.ToString("dd/MM/yyyy")</a>
+                }
+            </ul>
+        </div>
+    <a asp-controller="Patient" asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+</div>

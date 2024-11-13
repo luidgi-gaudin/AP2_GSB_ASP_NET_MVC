@@ -1,0 +1,41 @@
+@model MedicamentViewModel
+
+@{
+    Layout = null;
+}
+
+<div>
+    <form asp-action="Edit" method="post">
+        <div class="form-group">
+            <input type="hidden" asp-for="Medicament.MedicamentId" />
+            <label asp-for="Medicament.Libelle_med" class="control-label">Nom du médicament :</label>
+            <input asp-for="Medicament.Libelle_med" class="form-control" />
+            <span asp-validation-for="Medicament.Libelle_med" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Medicament.Contr_indication" class="control-label">Contre-indication :</label>
+            <input asp-for="Medicament.Contr_indication" class="form-control" />
+            <span asp-validation-for="Medicament.Contr_indication" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Medicament.Stock" class="control-label">Stock :</label>
+            <input asp-for="Medicament.Stock" class="form-control" />
+            <span asp-validation-for="Medicament.Stock" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Allergies :</label>
+            @foreach (var allergie in Model.Allergies)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="SelectedAllergies" value="@allergie.AllergieId" @(Model.SelectedAllergies.Contains(allergie.AllergieId) ? "checked" : "") />
+                    <label class="form-check-label">@allergie.Libelle_al</label>
+                </div>
+            }
+        </div>
+        <br/>
+        <div class="form-group">
+            <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+            <input type="submit" value="Enregistrer" class="btn btn-primary"/>
+        </div>
+    </form>
+</div>

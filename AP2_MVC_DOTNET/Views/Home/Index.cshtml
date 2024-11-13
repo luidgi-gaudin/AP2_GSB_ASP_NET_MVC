@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Acceuil";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenue Docteur</h1>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                    <h3>Gestion des ordonnances</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Gérez vos ordonnances facilement et rapidement.</p>
+                    <a class="btn btn-primary">Accéder</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                    <h3>Gestion des stocks de médicaments</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Surveillez et gérez vos stocks de médicaments.</p>
+                    <a asp-action="Index" asp-controller="Medicament" class="btn btn-primary">Accéder</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                    <h3>Dashboard</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Visualisez vos données et statistiques.</p>
+                    <a class="btn btn-primary">Accéder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
