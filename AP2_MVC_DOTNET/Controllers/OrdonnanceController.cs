@@ -323,7 +323,7 @@ public class OrdonnanceController : Controller
                 infoTable.AddCell(new Cell().Add(new Paragraph("Date :")).SetFont(boldFont).SetFontSize(12).SetPadding(5).SetBorder(Border.NO_BORDER));
                 infoTable.AddCell(new Cell().Add(new Paragraph(ordonnance.DateCréation.ToShortDateString())).SetFont(regularFont).SetFontSize(12).SetPadding(5).SetBorder(Border.NO_BORDER));
                 infoTable.AddCell(new Cell().Add(new Paragraph("Médecin :")).SetFont(boldFont).SetFontSize(12).SetPadding(5).SetBorder(Border.NO_BORDER));
-                infoTable.AddCell(new Cell().Add(new Paragraph($"{ordonnance.Medecin.Nom_m}")).SetFont(regularFont).SetFontSize(12).SetPadding(5).SetBorder(Border.NO_BORDER));
+                infoTable.AddCell(new Cell().Add(new Paragraph($"{ordonnance.Medecin.Nom_m} {ordonnance.Medecin.Prenom_m}")).SetFont(regularFont).SetFontSize(12).SetPadding(5).SetBorder(Border.NO_BORDER));
                 infoTable.AddCell(new Cell().Add(new Paragraph("Patient :")).SetFont(boldFont).SetFontSize(12).SetPadding(5).SetBorder(Border.NO_BORDER));
                 infoTable.AddCell(new Cell().Add(new Paragraph($"{ordonnance.Patient.Prenom_p} {ordonnance.Patient.Nom_p}")).SetFont(regularFont).SetFontSize(12).SetPadding(5).SetBorder(Border.NO_BORDER));
                 document.Add(infoTable);

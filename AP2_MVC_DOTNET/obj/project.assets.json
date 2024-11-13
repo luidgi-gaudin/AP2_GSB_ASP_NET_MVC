@@ -7583,31 +7583,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\luidg\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\luidgi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\luidg\\RiderProjects\\AP2_MVC_DOTNET\\AP2_MVC_DOTNET\\AP2_MVC_DOTNET.csproj",
+      "projectUniqueName": "C:\\Users\\luidgi\\RiderProjects\\AP2_GSB_ASP_NET_MVC\\AP2_MVC_DOTNET\\AP2_MVC_DOTNET.csproj",
       "projectName": "AP2_MVC_DOTNET",
-      "projectPath": "C:\\Users\\luidg\\RiderProjects\\AP2_MVC_DOTNET\\AP2_MVC_DOTNET\\AP2_MVC_DOTNET.csproj",
-      "packagesPath": "C:\\Users\\luidg\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\luidg\\RiderProjects\\AP2_MVC_DOTNET\\AP2_MVC_DOTNET\\obj\\",
+      "projectPath": "C:\\Users\\luidgi\\RiderProjects\\AP2_GSB_ASP_NET_MVC\\AP2_MVC_DOTNET\\AP2_MVC_DOTNET.csproj",
+      "packagesPath": "C:\\Users\\luidgi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\luidgi\\RiderProjects\\AP2_GSB_ASP_NET_MVC\\AP2_MVC_DOTNET\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "C:\\Users\\luidg\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\luidgi\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7620,6 +7614,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -7690,7 +7689,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\luidgi\\.dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

@@ -31,4 +31,8 @@
       <_ContentIncludedByDefault Remove="Views\Ordonnance\Details.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
 </Project>
