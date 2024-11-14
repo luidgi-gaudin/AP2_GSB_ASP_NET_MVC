@@ -1,44 +1,144 @@
-﻿@{
-    ViewData["Title"] = "Acceuil";
+﻿@model AP2_MVC_DOTNET.Models.DashboardViewModel
+                                                  
+@{
+    ViewBag.Title = "Tableau de Bord";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Bienvenue Docteur</h1>
-</div>
 <div class="container mt-5">
+    <h1 class="text-center mb-4">Tableau de Bord</h1>
+
     <div class="row">
-        <div class="col-md-4">
-            <div class="card text-center h-100">
-                <div class="card-header">
-                    <h3>Gestion des ordonnances</h3>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Gérez vos ordonnances facilement et rapidement.</p>
-                    <a class="btn btn-primary">Accéder</a>
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total des Patients</h5>
+                    <p class="display-4">@Model.TotalPatients</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-center h-100">
-                <div class="card-header">
-                    <h3>Gestion des stocks de médicaments</h3>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Surveillez et gérez vos stocks de médicaments.</p>
-                    <a asp-action="Index" asp-controller="Medicament" class="btn btn-primary">Accéder</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center h-100">
-                <div class="card-header">
-                    <h3>Dashboard</h3>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Visualisez vos données et statistiques.</p>
-                    <a class="btn btn-primary">Accéder</a>
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total des Ordonnances</h5>
+                    <p class="display-4">@Model.TotalOrdonnances</p>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+
+        <!-- Graphique des Médicaments -->
+        <div class="card col-md-5 shadow-sm mx-3 mb-4">
+            <div class="card-body">
+                <h5 class="card-title text-center">Proportion des Médicaments</h5>
+                <div class="chart-container">
+                    <canvas id="medicamentChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="card col-md-5 shadow-sm mx-3 mb-4">
+            <div class="card-body">
+                <h5 class="card-title text-center">Antécédents les Plus Fréquents</h5>
+                <div class="chart-container">
+                    <canvas id="antecedentChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graphique des Allergies -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-center">Allergies les Plus Fréquentes</h5>
+            <div class="chart-container">
+                <canvas id="allergieChart"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Graphique Médicaments
+    var medicamentCtx = document.getElementById('medicamentChart').getContext('2d');
+    var medicamentChart = new Chart(medicamentCtx, {
+        type: 'doughnut',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.MedicamentProportion.Keys)),
+            datasets: [{
+                data: @Html.Raw(Json.Serialize(Model.MedicamentProportion.Values)),
+                backgroundColor: [
+                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+                ],
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            }
+        }
+    });
+
+    // Graphique Allergies
+    var allergieCtx = document.getElementById('allergieChart').getContext('2d');
+    var allergieChart = new Chart(allergieCtx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.AllergieProportion.Keys)),
+            datasets: [{
+                label: 'Fréquence des Allergies',
+                data: @Html.Raw(Json.Serialize(Model.AllergieProportion.Values)),
+                backgroundColor: '#36A2EB'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Graphique Antécédents
+    var antecedentCtx = document.getElementById('antecedentChart').getContext('2d');
+    var antecedentChart = new Chart(antecedentCtx, {
+        type: 'pie',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.AntecedentProportion.Keys)),
+            datasets: [{
+                data: @Html.Raw(Json.Serialize(Model.AntecedentProportion.Values)),
+                backgroundColor: [
+                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+                ],
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            }
+        }
+    });
+</script>
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    .chart-container {
+        position: relative;
+        width: 100%;
+        height: 250px; /* Hauteur ajustable pour réduire la taille */
+    }
+</style>

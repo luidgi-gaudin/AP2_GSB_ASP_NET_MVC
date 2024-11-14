@@ -5,41 +5,107 @@
     Layout = "_Layout";
 }
 
-<h2>Liste des Ordonnances</h2>
-<div>
-    <div class="col text-right">
-        <a href="@Url.Action("Add", "Ordonnance")" class="btn btn-primary">Ajouter une ordonnance</a>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Liste des Ordonnances</h2>
+
+    <!-- Bouton pour ajouter une ordonnance -->
+    <div class="d-flex justify-content-end mb-3">
+        <a href="@Url.Action("Add", "Ordonnance")" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Ajouter une ordonnance
+        </a>
     </div>
-    <br/>
-    <table class="table table-hover table-bordered">
-        <thead>
-        <tr>
-            <th>Médecin</th>
-            <th>Patient</th>
-            <th>Durée du traitement</th>
-            <th>Date création</th>
-            <th>Actions</th>
-            <th>PDF</th>
-        </tr>
-        </thead>
-        <tbody>
+
+    <!-- Barre de recherche -->
+    <div class="input-group mb-4">
+        <input type="text" id="searchInput" class="form-control" placeholder="Rechercher par médecin ou patient..." aria-label="Rechercher">
+        <div class="input-group-append">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+        </div>
+    </div>
+
+    <!-- Cartes des ordonnances -->
+    <div class="row" id="ordonnanceCards">
         @foreach (var ordonnance in Model)
         {
-            <tr>
-                <td>@ordonnance.Medecin.Nom_m @ordonnance.Medecin.Prenom_m</td>
-                <td>@ordonnance.Patient.Nom_p @ordonnance.Patient.Prenom_p</td>
-                <td>@ordonnance.Duree_traitement</td>
-                <td>@ordonnance.DateCréation.ToString("dd/MM/yyyy")</td>
-                <td>
-                    <a href="@Url.Action("Details", "Ordonnance", new { id = ordonnance.OrdonnanceId })" class="btn btn-secondary">Détails</a>
-                    <a href="@Url.Action("Edit", "Ordonnance", new { id = ordonnance.OrdonnanceId })" class="btn btn-warning">Modifier</a>
-                    <a asp-action="Delete" asp-controller="Ordonnance" asp-route-id="@ordonnance.OrdonnanceId" class="btn btn-danger">Supprimer</a>
-                </td>
-                <td>
-                    <a asp-action="ExportToPdf" asp-controller="Ordonnance" asp-route-id="@ordonnance.OrdonnanceId" class="btn btn-info">Exporter en PDF</a>
-                </td>
-            </tr>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-person-badge"></i> Médecin : @ordonnance.Medecin.Nom_m @ordonnance.Medecin.Prenom_m
+                        </h5>
+                        <p class="card-text">
+                            <strong>Patient :</strong> @ordonnance.Patient.Nom_p @ordonnance.Patient.Prenom_p
+                        </p>
+                        <p class="card-text">
+                            <strong>Durée du traitement :</strong> @ordonnance.Duree_traitement
+                        </p>
+                        <p class="card-text">
+                            <strong>Date création :</strong> @ordonnance.DateCréation.ToString("dd/MM/yyyy")
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Details", "Ordonnance", new { id = ordonnance.OrdonnanceId })" 
+                               class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-eye"></i> Détails
+                            </a>
+                            <a href="@Url.Action("Edit", "Ordonnance", new { id = ordonnance.OrdonnanceId })" 
+                               class="btn btn-outline-warning btn-sm">
+                                <i class="bi bi-pencil-square"></i> Modifier
+                            </a>
+                            <a asp-action="Delete" asp-controller="Ordonnance" asp-route-id="@ordonnance.OrdonnanceId" 
+                               class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i> Supprimer
+                            </a>
+                            <a asp-action="ExportToPdf" asp-controller="Ordonnance" asp-route-id="@ordonnance.OrdonnanceId" 
+                               class="btn btn-outline-info btn-sm">
+                                <i class="bi bi-file-earmark-pdf"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-        </tbody>
-    </table>
+    </div>
 </div>
+
+<script>
+    // Filtrage en temps réel des cartes
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        var filter = this.value.toLowerCase();
+        var cards = document.querySelectorAll('#ordonnanceCards .col-md-4');
+
+        cards.forEach(function(card) {
+            var medecin = card.querySelector('.card-title').textContent.toLowerCase();
+            var patient = card.querySelector('.card-text').textContent.toLowerCase();
+
+            if (medecin.includes(filter) || patient.includes(filter)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<style>
+    .container {
+        max-width: 1200px;
+    }
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+    .card {
+        border-radius: 10px;
+    }
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+    .card-text {
+        font-size: 0.9rem;
+    }
+    .btn-sm i {
+        margin-right: 5px;
+    }
+</style>

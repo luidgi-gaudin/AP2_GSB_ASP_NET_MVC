@@ -1,4 +1,5 @@
 using AP2_MVC_DOTNET.data;
+using AP2_MVC_DOTNET.Services;
 using AP2_MVC_DOTNET.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     options.SlidingExpiration = true;
 });
+
+builder.Services.AddSingleton<EmailService>();
 
 var app = builder.Build();
 
