@@ -1,47 +1,76 @@
-@model AP2_MVC_DOTNET.Models.ContactViewModel
-
 @{
-    ViewBag.Title = "Contact";
+    Layout = "_Layout";
 }
+
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">Contactez-nous</h2>
-
-    <!-- Message de confirmation -->
-    @if (TempData["Message"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["Message"]
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <form
+                action="https://formspree.io/f/xwpkbjqn"
+                method="POST"
+                class="p-4 border rounded shadow-sm bg-light"
+            >
+                <div class="mb-3">
+                    <label for="firstname" class="form-label">Prénom :</label>
+                    <input
+                        type="text"
+                        id="firstname"
+                        name="firstname"
+                        class="form-control"
+                        placeholder="Entrez votre prénom"
+                        required
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="lastname" class="form-label">Nom :</label>
+                    <input
+                        type="text"
+                        id="lastname"
+                        name="lastname"
+                        class="form-control"
+                        placeholder="Entrez votre nom"
+                        required
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Votre email :</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="Entrez votre adresse email"
+                        required
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Sujet :</label>
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        class="form-control"
+                        placeholder="Entrez le sujet de votre message"
+                        required
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Votre message :</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        class="form-control"
+                        rows="5"
+                        placeholder="Entrez votre message"
+                        required
+                    ></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+                </div>
+            </form>
         </div>
-    }
-
-    <!-- Formulaire de contact -->
-    <form asp-action="Submit" asp-controller="Contact" method="post" class="needs-validation" novalidate>
-        <div class="form-group mb-3">
-            <label asp-for="Name">Nom</label>
-            <input asp-for="Name" class="form-control" placeholder="Votre nom" />
-            <span class="text-danger" asp-validation-for="Name"></span>
-        </div>
-        <div class="form-group mb-3">
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" class="form-control" placeholder="Votre email" />
-            <span class="text-danger" asp-validation-for="Email"></span>
-        </div>
-        <div class="form-group mb-3">
-            <label asp-for="Subject">Sujet</label>
-            <input asp-for="Subject" class="form-control" placeholder="Sujet du message" />
-            <span class="text-danger" asp-validation-for="Subject"></span>
-        </div>
-        <div class="form-group mb-3">
-            <label asp-for="Message">Message</label>
-            <textarea asp-for="Message" class="form-control" rows="5" placeholder="Votre message..."></textarea>
-            <span class="text-danger" asp-validation-for="Message"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">
-            <i class="bi bi-envelope"></i> Envoyer
-        </button>
-    </form>
+    </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>

@@ -163,7 +163,8 @@ p {
   margin-top:10px;
 }
 .screen2 {
-  margin: auto;
+  margin-inline-start: auto;
+  margin-right: 2rem;
 }
 .gsb{
   width: 200px;

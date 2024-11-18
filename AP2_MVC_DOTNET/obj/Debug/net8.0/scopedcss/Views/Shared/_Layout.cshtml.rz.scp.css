@@ -163,7 +163,8 @@ p[b-sln7cgxg3w] {
   margin-top:10px;
 }
 .screen2[b-sln7cgxg3w] {
-  margin: auto;
+  margin-inline-start: auto;
+  margin-right: 2rem;
 }
 .gsb[b-sln7cgxg3w]{
   width: 200px;

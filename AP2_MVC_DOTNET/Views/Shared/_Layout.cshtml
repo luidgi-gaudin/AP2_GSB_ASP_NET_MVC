@@ -138,10 +138,12 @@
                         </a>
                     </div>
                     <div class="col">
-                        <div class="panneau">
+                        <a asp-action="Index" asp-controller="Faq" class="panneau" style="text-decoration: none">
+                        <div class="panneau @isActive("Faq")">
                             <i class="bi bi-question-lg" style="font-size: 3rem"></i><br>
                             <p>FAQ</p>
                         </div>
+                        </a>
                     </div>
                 </div>
             }

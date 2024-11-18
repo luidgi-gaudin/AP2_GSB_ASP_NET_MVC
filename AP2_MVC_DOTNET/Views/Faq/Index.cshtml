@@ -1,0 +1,91 @@
+@{
+    ViewBag.Title = "FAQ";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Foire aux Questions (FAQ)</h2>
+    <p class="text-muted text-center">
+        Retrouvez ici les réponses aux questions les plus fréquemment posées concernant l'application MedManager.
+    </p>
+
+    <div class="accordion" id="faqAccordion">
+        <!-- Question 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="false"
+                    aria-controls="collapseOne">
+                    Pourquoi choisir MedManager ?
+                </button>
+            </h2>
+            <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    MedManager est conçu pour répondre aux besoins des médecins modernes. Voici pourquoi vous devriez choisir cette application :
+                    <ul>
+                        <li>Accès sécurisé et confidentiel à des données médicales actualisées.</li>
+                        <li>Interface intuitive pour une utilisation rapide et efficace.</li>
+                        <li>Outils puissants pour gérer vos consultations et prescriptions.</li>
+                        <li>Une plateforme fiable, soutenue par le leader pharmaceutique Galaxy Swiss Bourdin (GSB).</li>
+                        <li>Support technique dédié pour répondre à vos questions et résoudre les problèmes rapidement.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button 
+                    class="accordion-button collapsed" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#collapseTwo" 
+                    aria-expanded="false" 
+                    aria-controls="collapseTwo">
+                    Quelles données médicales sont disponibles sur l'application ?
+                </button>
+            </h2>
+            <div 
+                id="collapseTwo" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="headingTwo" 
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    L'application fournit des informations médicales liées aux médicaments proposés par Galaxy Swiss Bourdin (GSB). Ces données incluent des fiches techniques, des rapports d'efficacité et des informations sur les effets secondaires.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button 
+                    class="accordion-button collapsed" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#collapseThree" 
+                    aria-expanded="false" 
+                    aria-controls="collapseThree">
+                    Comment l'application garantit-elle la sécurité des données ?
+                </button>
+            </h2>
+            <div 
+                id="collapseThree" 
+                class="accordion-collapse collapse" 
+                aria-labelledby="headingThree" 
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    MedManager utilise un système d'authentification sécurisé basé sur des protocoles modernes. Toutes les données sont chiffrées et seules les personnes autorisées peuvent y accéder. Des audits de sécurité réguliers sont effectués pour garantir la conformité.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
