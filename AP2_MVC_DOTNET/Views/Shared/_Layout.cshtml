@@ -47,8 +47,8 @@
                     <div style="display: flex; flex-direction: column;">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <br/>
-                            <a class="btn btn-danger" asp-action="Logout" asp-controller="Account">Déconnexion</a>
+                            <a style="margin: 0.5rem" class="btn btn-secondary" asp-action="Edit" asp-controller="Account">Modifier le Compte</a>
+                            <a style="margin: 0.5rem" class="btn btn-danger" asp-action="Logout" asp-controller="Account">Déconnexion</a>
                         }
                         else
                         {

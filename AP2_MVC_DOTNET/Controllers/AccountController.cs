@@ -74,6 +74,101 @@ public class AccountController : Controller
 
         return View(model);
     }
+    
+    public async Task<IActionResult> Edit()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var model = new EditMedecinViewModel
+        {
+            Nom_m = user.Nom_m,
+            Prenom_m = user.Prenom_m,
+            Date_naissance_m = user.Date_naissance_m,
+            Email = user.Email,
+            UserName = user.UserName
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(EditMedecinViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Nom_m = model.Nom_m;
+            user.Prenom_m = model.Prenom_m;
+            user.Date_naissance_m = model.Date_naissance_m;
+            user.Email = model.Email;
+            user.UserName = model.UserName;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                await _signInManager.RefreshSignInAsync(user);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+        }
+        return View(model);
+    }
+    
+    // GET: Account/ChangePassword
+    public IActionResult ChangePassword()
+    {
+        return View();
+    }
+
+    // POST: Account/ChangePassword
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var changePasswordResult = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+        if (changePasswordResult.Succeeded)
+        {
+            await _signInManager.RefreshSignInAsync(user);
+            TempData["StatusMessage"] = "Votre mot de passe a été changé avec succès.";
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+            foreach (var error in changePasswordResult.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return View(model);
+        }
+    }
+
 
    
 }
