@@ -70,7 +70,6 @@
 <script>
         let patientAllergies = [];
 
-        // Charger les allergies au chargement de la page
         document.addEventListener('DOMContentLoaded', async function() {
             const patientSelect = document.getElementById('patientSelect');
             if (patientSelect.value) {
@@ -109,7 +108,6 @@
                 checkbox.disabled = hasAllergy;
                 checkbox.checked = hasAllergy ? false : checkbox.checked;
 
-                // Mise à jour visuelle
                 checkbox.closest('.form-check').style.opacity = hasAllergy ? '0.5' : '1';
             });
         }

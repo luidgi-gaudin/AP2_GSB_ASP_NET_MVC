@@ -1,4 +1,3 @@
-using AP2_MVC_DOTNET.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace AP2_MVC_DOTNET.ViewModels;

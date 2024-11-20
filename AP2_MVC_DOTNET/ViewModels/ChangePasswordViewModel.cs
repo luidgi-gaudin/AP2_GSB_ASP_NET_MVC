@@ -1,5 +1,3 @@
-// Dans AP2_MVC_DOTNET/ViewModels/ChangePasswordViewModel.cs
-
 using System.ComponentModel.DataAnnotations;
 
 namespace AP2_MVC_DOTNET.ViewModels

@@ -18,7 +18,7 @@ public class AccountController : Controller
 
     public IActionResult Login()
     {
-        return View(); // Affiche la vue Login
+        return View();
     }
 
     [HttpPost]
@@ -130,13 +130,11 @@ public class AccountController : Controller
         return View(model);
     }
     
-    // GET: Account/ChangePassword
     public IActionResult ChangePassword()
     {
         return View();
     }
 
-    // POST: Account/ChangePassword
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)

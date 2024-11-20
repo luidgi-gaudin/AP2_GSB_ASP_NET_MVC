@@ -107,7 +107,6 @@ public class OrdonnanceController : Controller
             return View(viewModel);
         }
 
-        // Vérification des allergies
         foreach (var medicament in selectedMedicaments)
         {
             if (medicament.Allergies.Any(a => patient.Allergies.Any(pa => pa.AllergieId == a.AllergieId)))
@@ -128,7 +127,6 @@ public class OrdonnanceController : Controller
             PatientId = patient.PatientId
         };
 
-        // Ajout des médicaments
         ordonnance.Medicaments = new List<Medicament>();
         foreach (var medicament in selectedMedicaments)
         {
@@ -207,7 +205,6 @@ public class OrdonnanceController : Controller
             return View(viewModel);
         }
 
-        // Vérification des allergies
         foreach (var medicament in selectedMedicaments)
         {
             if (medicament.Allergies.Any(a => patient.Allergies.Any(pa => pa.AllergieId == a.AllergieId)))
@@ -222,7 +219,6 @@ public class OrdonnanceController : Controller
         ordonnance.Duree_traitement = viewModel.Duree_traitement;
         ordonnance.Instructions_specifique = viewModel.Instructions_specifique;
         
-        // Mise à jour des médicaments
         ordonnance.Medicaments.Clear();
         foreach (var medicament in selectedMedicaments)
         {
@@ -263,10 +259,9 @@ public class OrdonnanceController : Controller
             return NotFound();
         }
 
-        return View(ordonnance); // Affiche une vue de confirmation
+        return View(ordonnance);
     }
 
-    // Action POST pour confirmer et exécuter la suppression
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)

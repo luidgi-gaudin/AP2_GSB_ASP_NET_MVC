@@ -57,7 +57,6 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Graphique Médicaments
     var medicamentCtx = document.getElementById('medicamentChart').getContext('2d');
     var medicamentChart = new Chart(medicamentCtx, {
         type: 'doughnut',
@@ -81,7 +80,6 @@
         }
     });
 
-    // Graphique Allergies
     var allergieCtx = document.getElementById('allergieChart').getContext('2d');
     var allergieChart = new Chart(allergieCtx, {
         type: 'bar',
@@ -104,7 +102,6 @@
         }
     });
 
-    // Graphique Antécédents
     var antecedentCtx = document.getElementById('antecedentChart').getContext('2d');
     var antecedentChart = new Chart(antecedentCtx, {
         type: 'pie',
@@ -139,6 +136,6 @@
     .chart-container {
         position: relative;
         width: 100%;
-        height: 250px; /* Hauteur ajustable pour réduire la taille */
+        height: 250px;
     }
 </style>

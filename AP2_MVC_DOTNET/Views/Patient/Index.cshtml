@@ -58,7 +58,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Contenu Popup -->
                 </div>
             </div>
         </div>
@@ -67,9 +66,9 @@
     <script>
         document.getElementById('searchInput').addEventListener('keyup', function() {
             var searchText = this.value.toLowerCase();
-            var patientCards = document.querySelectorAll('.patient-card'); //case a effacer
+            var patientCards = document.querySelectorAll('.patient-card');
             patientCards.forEach(function(card) {
-                var patientName = card.querySelector('.card-title').textContent.toLowerCase(); //case a rechercher
+                var patientName = card.querySelector('.card-title').textContent.toLowerCase();
                 if (patientName.includes(searchText)) {
                     card.style.display = '';
                 } else {

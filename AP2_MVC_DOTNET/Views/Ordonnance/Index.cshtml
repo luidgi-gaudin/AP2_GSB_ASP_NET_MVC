@@ -8,14 +8,12 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Liste des Ordonnances</h2>
 
-    <!-- Bouton pour ajouter une ordonnance -->
     <div class="d-flex justify-content-end mb-3">
         <a href="@Url.Action("Add", "Ordonnance")" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Ajouter une ordonnance
         </a>
     </div>
 
-    <!-- Barre de recherche -->
     <div class="input-group mb-4">
         <input type="text" id="searchInput" class="form-control" placeholder="Rechercher par médecin ou patient..." aria-label="Rechercher">
         <div class="input-group-append">
@@ -23,7 +21,6 @@
         </div>
     </div>
 
-    <!-- Cartes des ordonnances -->
     <div class="row" id="ordonnanceCards">
         @foreach (var ordonnance in Model)
         {
@@ -68,7 +65,6 @@
 </div>
 
 <script>
-    // Filtrage en temps réel des cartes
     document.getElementById('searchInput').addEventListener('keyup', function() {
         var filter = this.value.toLowerCase();
         var cards = document.querySelectorAll('#ordonnanceCards .col-md-4');

@@ -9,11 +9,9 @@ namespace AP2_MVC_DOTNET.Controllers;
 [Authorize]
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _context;
-    public HomeController(ILogger<HomeController> logger,ApplicationDbContext dbContext)
+    public HomeController(ApplicationDbContext dbContext)
     {
-        _logger = logger;
         _context = dbContext;
     }
 
@@ -21,25 +19,20 @@ public class HomeController : Controller
     {
         var model = new DashboardViewModel
         {
-            // Calcul du nombre total de patients
             TotalPatients = _context.Patients.Count(),
 
-            // Calcul du nombre total d'ordonnances
             TotalOrdonnances = _context.Ordonnances.Count(),
 
-            // Proportion de chaque médicament utilisé dans les ordonnances
             MedicamentProportion = _context.Ordonnances
                 .SelectMany(o => o.Medicaments)
                 .GroupBy(m => m.Libelle_med)
                 .ToDictionary(g => g.Key, g => g.Count()),
 
-            // Nombre de patients ayant chaque type d'allergie
             AllergieProportion = _context.Patients
                 .SelectMany(p => p.Allergies)
                 .GroupBy(a => a.Libelle_al)
                 .ToDictionary(g => g.Key, g => g.Count()),
 
-            // Nombre de patients ayant chaque type d'antécédent
             AntecedentProportion = _context.Patients
                 .SelectMany(p => p.Antecedents)
                 .GroupBy(a => a.Libelle_a)

@@ -1,6 +1,3 @@
-// Dans AP2_MVC_DOTNET/ViewModels/EditMedecinViewModel.cs
-
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace AP2_MVC_DOTNET.ViewModels

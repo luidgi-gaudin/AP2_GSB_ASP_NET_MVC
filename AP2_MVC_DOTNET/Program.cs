@@ -33,7 +33,6 @@ builder.Services.AddIdentity<Medecin, IdentityRole>(options =>
 
 
 
-// Configure authentication and change the default redirect paths
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
