@@ -57,7 +57,7 @@ Concevoir une application web sécurisée permettant aux médecins de gérer eff
 ### Technologies Utilisées
 - **Backend :** .NET Core
 - **Frontend :** ASP.NET MVC
-- **Base de Données :** SQL Server
+- **Base de Données :** MySQL
 - **ORM :** Entity Framework Core
 - **Authentification :** ASP.NET Identity
 
