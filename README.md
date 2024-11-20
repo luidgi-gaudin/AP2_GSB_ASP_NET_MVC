@@ -60,6 +60,7 @@ Concevoir une application web sécurisée permettant aux médecins de gérer eff
 - **Base de Données :** MySQL
 - **ORM :** Entity Framework Core
 - **Authentification :** ASP.NET Identity
+- **PDF :** IText7
 
 ## 🚧 Structure du Projet
 
@@ -80,17 +81,6 @@ Concevoir une application web sécurisée permettant aux médecins de gérer eff
 ## 👥 Équipe de Développement
 
 - **Développeur Principal :** Luidgi
-- **Encadrement Pédagogique :** Professeurs BTS SIO
-
-## 📄 Licence
-
-Projet sous licence MIT - Voir [LICENSE](LICENSE) pour détails
-
-## 🤝 Remerciements
-
-- Équipe pédagogique du BTS SIO
-- Laboratoire Galaxy Swiss Bourdin
-- Communauté open-source
 
 ## 🎓 Pour les Futurs Étudiants BTS SIO
 
