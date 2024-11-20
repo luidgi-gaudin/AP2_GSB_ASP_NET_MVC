@@ -37,6 +37,23 @@ namespace AP2_MVC_DOTNET.Migrations
                     b.HasKey("AllergieId");
 
                     b.ToTable("Allergies");
+
+                    b.HasData(
+                        new
+                        {
+                            AllergieId = 1,
+                            Libelle_al = "Pollen"
+                        },
+                        new
+                        {
+                            AllergieId = 2,
+                            Libelle_al = "Acariens"
+                        },
+                        new
+                        {
+                            AllergieId = 3,
+                            Libelle_al = "Pénicilline"
+                        });
                 });
 
             modelBuilder.Entity("AP2_MVC_DOTNET.Models.Antecedent", b =>
@@ -54,6 +71,23 @@ namespace AP2_MVC_DOTNET.Migrations
                     b.HasKey("AntecedentId");
 
                     b.ToTable("Antecedents");
+
+                    b.HasData(
+                        new
+                        {
+                            AntecedentId = 1,
+                            Libelle_a = "Diabète"
+                        },
+                        new
+                        {
+                            AntecedentId = 2,
+                            Libelle_a = "Hypertension"
+                        },
+                        new
+                        {
+                            AntecedentId = 3,
+                            Libelle_a = "Asthme"
+                        });
                 });
 
             modelBuilder.Entity("AP2_MVC_DOTNET.Models.ErrorViewModel", b =>
@@ -163,6 +197,43 @@ namespace AP2_MVC_DOTNET.Migrations
                     b.HasKey("MedicamentId");
 
                     b.ToTable("Medicaments");
+
+                    b.HasData(
+                        new
+                        {
+                            MedicamentId = 1,
+                            Contr_indication = "Aucune",
+                            Libelle_med = "Aspirine",
+                            Stock = 100
+                        },
+                        new
+                        {
+                            MedicamentId = 2,
+                            Contr_indication = "Aucune",
+                            Libelle_med = "Paracétamol",
+                            Stock = 50
+                        },
+                        new
+                        {
+                            MedicamentId = 3,
+                            Contr_indication = "Aucune",
+                            Libelle_med = "Ibuprofène",
+                            Stock = 75
+                        },
+                        new
+                        {
+                            MedicamentId = 4,
+                            Contr_indication = "Allergie",
+                            Libelle_med = "Pénicilline",
+                            Stock = 25
+                        },
+                        new
+                        {
+                            MedicamentId = 5,
+                            Contr_indication = "Hypertension",
+                            Libelle_med = "Lisinopril",
+                            Stock = 10
+                        });
                 });
 
             modelBuilder.Entity("AP2_MVC_DOTNET.Models.Ordonnance", b =>
@@ -248,62 +319,46 @@ namespace AP2_MVC_DOTNET.Migrations
 
             modelBuilder.Entity("AllergieMedicament", b =>
                 {
-                    b.Property<int>("AllergiesAllergieId")
+                    b.Property<int>("AllergieId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MedicamentsMedicamentId")
+                    b.Property<int>("MedicamentId")
                         .HasColumnType("int");
 
-                    b.HasKey("AllergiesAllergieId", "MedicamentsMedicamentId");
+                    b.HasKey("AllergieId", "MedicamentId");
 
-                    b.HasIndex("MedicamentsMedicamentId");
+                    b.HasIndex("MedicamentId");
 
                     b.ToTable("AllergieMedicament");
-                });
 
-            modelBuilder.Entity("AllergiePatient", b =>
-                {
-                    b.Property<int>("AllergiesAllergieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientsPatientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AllergiesAllergieId", "PatientsPatientId");
-
-                    b.HasIndex("PatientsPatientId");
-
-                    b.ToTable("AllergiePatient");
+                    b.HasData(
+                        new
+                        {
+                            AllergieId = 3,
+                            MedicamentId = 4
+                        });
                 });
 
             modelBuilder.Entity("AntecedentMedicament", b =>
                 {
-                    b.Property<int>("AntecedentsAntecedentId")
+                    b.Property<int>("AntecedentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MedicamentsMedicamentId")
+                    b.Property<int>("MedicamentId")
                         .HasColumnType("int");
 
-                    b.HasKey("AntecedentsAntecedentId", "MedicamentsMedicamentId");
+                    b.HasKey("AntecedentId", "MedicamentId");
 
-                    b.HasIndex("MedicamentsMedicamentId");
+                    b.HasIndex("MedicamentId");
 
                     b.ToTable("AntecedentMedicament");
-                });
 
-            modelBuilder.Entity("AntecedentPatient", b =>
-                {
-                    b.Property<int>("AntecedentsAntecedentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientsPatientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AntecedentsAntecedentId", "PatientsPatientId");
-
-                    b.HasIndex("PatientsPatientId");
-
-                    b.ToTable("AntecedentPatient");
+                    b.HasData(
+                        new
+                        {
+                            AntecedentId = 2,
+                            MedicamentId = 5
+                        });
                 });
 
             modelBuilder.Entity("MedicamentOrdonnance", b =>
@@ -453,6 +508,55 @@ namespace AP2_MVC_DOTNET.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PatientAllergie", b =>
+                {
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AllergieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PatientId", "AllergieId");
+
+                    b.HasIndex("AllergieId");
+
+                    b.ToTable("PatientAllergie");
+
+                    b.HasData(
+                        new
+                        {
+                            PatientId = 1,
+                            AllergieId = 1
+                        },
+                        new
+                        {
+                            PatientId = 1,
+                            AllergieId = 3
+                        });
+                });
+
+            modelBuilder.Entity("PatientAntecedent", b =>
+                {
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AntecedentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PatientId", "AntecedentId");
+
+                    b.HasIndex("AntecedentId");
+
+                    b.ToTable("PatientAntecedent");
+
+                    b.HasData(
+                        new
+                        {
+                            PatientId = 1,
+                            AntecedentId = 2
+                        });
+                });
+
             modelBuilder.Entity("AP2_MVC_DOTNET.Models.Ordonnance", b =>
                 {
                     b.HasOne("AP2_MVC_DOTNET.Models.Medecin", "Medecin")
@@ -476,28 +580,13 @@ namespace AP2_MVC_DOTNET.Migrations
                 {
                     b.HasOne("AP2_MVC_DOTNET.Models.Allergie", null)
                         .WithMany()
-                        .HasForeignKey("AllergiesAllergieId")
+                        .HasForeignKey("AllergieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AP2_MVC_DOTNET.Models.Medicament", null)
                         .WithMany()
-                        .HasForeignKey("MedicamentsMedicamentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AllergiePatient", b =>
-                {
-                    b.HasOne("AP2_MVC_DOTNET.Models.Allergie", null)
-                        .WithMany()
-                        .HasForeignKey("AllergiesAllergieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AP2_MVC_DOTNET.Models.Patient", null)
-                        .WithMany()
-                        .HasForeignKey("PatientsPatientId")
+                        .HasForeignKey("MedicamentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -506,28 +595,13 @@ namespace AP2_MVC_DOTNET.Migrations
                 {
                     b.HasOne("AP2_MVC_DOTNET.Models.Antecedent", null)
                         .WithMany()
-                        .HasForeignKey("AntecedentsAntecedentId")
+                        .HasForeignKey("AntecedentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AP2_MVC_DOTNET.Models.Medicament", null)
                         .WithMany()
-                        .HasForeignKey("MedicamentsMedicamentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AntecedentPatient", b =>
-                {
-                    b.HasOne("AP2_MVC_DOTNET.Models.Antecedent", null)
-                        .WithMany()
-                        .HasForeignKey("AntecedentsAntecedentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AP2_MVC_DOTNET.Models.Patient", null)
-                        .WithMany()
-                        .HasForeignKey("PatientsPatientId")
+                        .HasForeignKey("MedicamentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -594,6 +668,36 @@ namespace AP2_MVC_DOTNET.Migrations
                     b.HasOne("AP2_MVC_DOTNET.Models.Medecin", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PatientAllergie", b =>
+                {
+                    b.HasOne("AP2_MVC_DOTNET.Models.Allergie", null)
+                        .WithMany()
+                        .HasForeignKey("AllergieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AP2_MVC_DOTNET.Models.Patient", null)
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PatientAntecedent", b =>
+                {
+                    b.HasOne("AP2_MVC_DOTNET.Models.Antecedent", null)
+                        .WithMany()
+                        .HasForeignKey("AntecedentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AP2_MVC_DOTNET.Models.Patient", null)
+                        .WithMany()
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
